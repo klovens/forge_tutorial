@@ -56,9 +56,7 @@ The original image as well as the resulting image and mask overlayed are shown b
 
 3. Cropping
 
-There are several techniques to crop the images and masks. Random crop will generate a
-Center crop
-Random safe crop
+There are several techniques to crop the images and masks. Random crop will crop an image randomly, but with a specific size while center crop will crop at the center of the image (and mask if provided). Random safe crop will ensure that at least some of the regions of interest (specified by having a mask) will be retained when the image is cropped. If not using safe crop, the cropped area may not include any part of the mask. The size of the cropped area is specified using a tuple containing the x, y, and z dimensions desired for the cropped area. Below we demonstrate how to call these particular transformations.
 
 * Random Crop
 ```python
@@ -69,3 +67,20 @@ img, msk = tsfm(image, mask)
 
 <img src="/Images/crop/randomcrop.png" alt="Random Crop" width="700"/>
 
+* Center Crop
+```python
+size = (150, 150, 50)
+tsfm = tr.CenterCrop(size, p=1)
+img, msk = tsfm(image, mask)
+```
+
+<img src="/Images/crop/centercrop.png" alt="Center Crop" width="700"/>
+
+* Random Safe Crop
+```python
+size = (50, 50, 50)
+tsfm = tr.RandomSegmentSafeCrop(crop_size=size, include=[1], p=1.0)
+img, msk = tsfm(image, mask=mask)
+```
+
+<img src="/Images/crop/safecrop.png" alt="Random Safe Crop" width="700"/>
