@@ -204,3 +204,24 @@ These augmentations can also be applied consecutively on the same image or a lis
 
 First, we make a list of 5 potential transformations. More or fewer transformations could be included in this list depending on the kind of transformations a user wishes to apply to their images and masks. Furthermore, we are now changing the values of the parameter p, which is the probability of applying the transformation to an image/mask pair. In all previous examples we set p to 1 for all transformations meaning that the transformation would be applied in each case.
 
+```python
+tsfms = [tr.Affine(angles=45, translation=0, scale=1,
+                         interpolator=sitk.sitkLinear, image_background=-1024,
+                         mask_background=0, reference=None, p=0.5),
+                         tr.SaltPepperNoise(noise_prob=0.2,
+                                  noise_range=(min_value, max_value),
+                                  random_seed=1, p=0.75),  
+                         tr.RandomSegmentSafeCrop(crop_size=(250, 250, 250), include=[1], p=0.4),
+                         tr.BionomialBlur(repetition=3, p=0.75),
+                         tr.Invert(maximum=1, p=0.2)]
+
+print(tsfms)
+#[Affine (angles=[(-0.7853981633974483, 0.7853981633974483), (-0.7853981633974483, 0.7853981633974483), (-0.7853981633974483, 0.7853981633974483)], interpolator=2, p=0.5), SaltPepperNoise (noise_prob=0.2, random_seed=1, p=0.75), RandomSegmentSafeCrop (min size=[250 250 250], interesting segments=[1], p=0.4), BionomialBlur (repetition=3, p=0.75), Invert (maximum=1, p=0.2)]
+```
+
+As shown in the variable tsfms, the transformations in the list are rotate, salt and pepper noise, random safe crop, blur, and invert.
+
+Compose will apply the transforms sequentially to the image and mask.
+
+
+
