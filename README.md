@@ -236,6 +236,8 @@ img, msk = tsfm(image, mask=mask)
 ```
 Below are some potential images that could be obtained from selecting random transformations from our predefined list of transformations.
 
+<img src="/Images/randomchoice/randomchoice1.png" alt="random 1" width="250"/> <img src="/Images/randomchoice/randomchoice2.png" alt="random 2" width="250"/> <img src="/Images/randomchoice/randomchoice3.png" alt="random 3" width="250"/>
+
 **OneOf** will select only one transform from the list.
 ```python
 tsfm = tr.OneOf(tsfms)
