@@ -84,3 +84,26 @@ img, msk = tsfm(image, mask=mask)
 ```
 
 <img src="/Images/crop/safecrop.png" alt="Random Safe Crop" width="700"/>
+
+4. Rotating
+
+Rotate the given CT image by constant value x, y, z angles.
+
+```python
+tsfm = tr.Affine(angles=180, translation=0, scale=1,
+                         interpolator=sitk.sitkLinear, image_background=-1024,
+                         mask_background=0, reference=None, p=1)
+img, msk = tsfm(image=image, mask=mask)
+```
+
+<img src="/Images/rotate/rotate180.png" alt="Rotate 180" width="700"/>
+
+```python
+tsfm = tr.Affine(angles=45, translation=0, scale=1,
+                         interpolator=sitk.sitkLinear, image_background=-1024,
+                         mask_background=0, reference=None, p=1)
+img, msk = tsfm(image=image, mask=mask)
+```
+
+<img src="/Images/rotate/rotate45.png" alt="Rotate 180" width="700"/>
+
