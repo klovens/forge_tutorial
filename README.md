@@ -55,6 +55,11 @@ The original image as well as the resulting image and mask overlayed are shown b
 <img src="/Images/original/lung_original.png" alt="Original Image" width="250"/> <img src="/Images/foreground/otsu.png" alt="Original Mask" width="250"/>
 
 3. Cropping
+
+There are several techniques to crop the images and masks. Random crop will generate a
+Center crop
+Random safe crop
+
 * Random Crop
 ```python
 size = (250, 250, 50)
