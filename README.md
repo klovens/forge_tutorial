@@ -201,7 +201,40 @@ img, msk = tsfm(image, mask=mask)
 <img src="/Images/gaussian/gaussian.png" alt="gaussian" width="300"/>
 
 13. Resizing
-14. Flipping
+
+Resizing can be done in various ways using Forge. The image/mask can expand or shrink by a factor or the they can be resized to a particular dimension using Resize as shown.
+```python
+output_size = [2 * x for x in image.GetSize()]
+              tsfm = tr.Resize(size=output_size,
+                         interpolator=sitk.sitkLinear,
+                         default_image_voxel_value=0,
+                         default_mask_voxel_value=0,
+                         p=1.0)
+ img, msk = tsfm(image, mask=mask)
+```
+
+We do not show the visualizations for resizing here as it is not obvious other than the resolution going up or down (looks similar to blur when shrinking, for example). However, we can confirm that the dimensions of the image and mask have changed.
+```python
+shrinkage_factors = [5, 5, 1]
+tsfm = tr.Shrink(shrinkage=shrinkage_factors, p=1)
+img, msk = tsfm(image, mask=mask)
+
+# Dimensions of the image and mask after shrink has been applied
+>>> img.GetSize()
+(102, 102, 140)
+>>> msk.GetSize()
+(102, 102, 140)
+
+#original dimensions of the image and mask
+>>> image.GetSize()
+(512, 512, 140)
+>>> mask.GetSize()
+(512, 512, 140)
+```
+Further, the mask alone can be resized in order to segment less or more of the area of interest.
+
+15. Flipping
+
 Visualizing in applications such as 3d Slicer will not show flipping properly so we visualize these image and masks using matplotlib. A list of 3 Boolean values indicate the axes that the image and mask (if provided) should be flipped. Here, we are flipping the image and mask around the y axis.
 
 ```python
