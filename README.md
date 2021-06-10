@@ -25,7 +25,7 @@ image, mask = reader('image.nrrd', 'primary-seg.nrrd')
 
 The file path to the image is ‘image.nrrd’ and the path to the mask is ‘primary-seg.nrrd’. These parameters can be set to the path of your own image and mask for augmentation. The original image and corresponding mask we will be using for this tutorial are shown below:
 
-<img src="/Images/original/lung_original.png" alt="Original Image" width="300"/> <img src="/Images/original/lung_mask_only.png" alt="Original Mask" width="300"/> <img src="/Images/original/lung_overlay.png" alt="Original Overlay" width="300"/>
+<img src="/Images/original/lung_original.png" alt="Original Image" width="250"/> <img src="/Images/original/lung_mask_only.png" alt="Original Mask" width="250"/> <img src="/Images/original/lung_overlay.png" alt="Original Overlay" width="250"/>
 
 Note that we show a single 2D slice for the majority of the augmentations, but the image and mask can be visualized in 3D to view the entire transformation. 
 In this tutorial we will cover examples of many of the 3D augmentations available in the package as well as how to combine multiple transformations to apply to a single image and mask.
