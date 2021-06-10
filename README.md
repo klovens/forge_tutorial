@@ -200,7 +200,9 @@ img, msk = tsfm(image=image, mask=mask)
 
 ## Combining a Set of Augmentations/Transformations
 
-These augmentations can also be applied consecutively on the same image or a list of possible augmentations can be applied in a probabilistic fashion. The figures below represent these types of combined transformations.
+These augmentations can also be applied consecutively on the same image or a list of possible augmentations can be applied in a probabilistic fashion. The figures below represent some of these methods of combining transformations.
+
+<img src="/Images/methods/randomselection.png" alt="randommethod" width="700"/>
 
 First, we make a list of 5 potential transformations. More or fewer transformations could be included in this list depending on the kind of transformations a user wishes to apply to their images and masks. Furthermore, we are now changing the values of the parameter p, which is the probability of applying the transformation to an image/mask pair. In all previous examples we set p to 1 for all transformations meaning that the transformation would be applied in each case.
 
