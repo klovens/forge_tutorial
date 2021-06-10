@@ -1,4 +1,4 @@
-# Welcome to Forge
+# Forge: A 3D augmentation package for image analysis
 
 Welcome to Forge, a 3D data augmentation package designed for medical imaging analysis.
 A development version of Forge is available using the following command. 
