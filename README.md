@@ -113,3 +113,48 @@ tsfm = tr.Invert(maximum=1, p=1.0)
 img, msk = tsfm(image, mask=mask)
 ```
 
+6. Clipping
+```python
+LOWER = 0
+UPPER = 150
+OUTSIDE = 0
+tsfm = tr.IsolateRange(lower_bound=LOWER,
+                               upper_bound=UPPER,
+                               image_outside_value=OUTSIDE,
+                               recalculate_mask=False,
+                               p=1.0)
+img, msk = tsfm(image, mask=mask)
+```
+
+7. Intensity Range Transfer
+```python
+LOWER = 0
+UPPER = 1
+tsfm = tr.IntensityRangeTransfer(interval=(LOWER, UPPER),
+                                         cast=None, p=1.0)
+img, msk = tsfm(image, mask)
+```
+9. Histogram Equalization
+```python
+tsfm = tr.AdaptiveHistogramEqualization(alpha=1.0, beta=0.5,
+                                                radius=2, p=1.0)
+img, msk = tsfm(image, mask=mask)
+```
+
+10. Mask Image
+This method allows for the masked and unmasked portions of an image to be isolated. This can be useful when there are large areas in the image that are not useful for a particular task, which can make it more difficult to train a model successfully.
+```python
+LABEL = 0
+OUTSIDE_MASK_LABEL = 1
+BACKGROUND = -1024
+tsfm = tr.MaskImage(segment_label=LABEL,
+                            image_outside_value=BACKGROUND,
+                            mask_outside_label=OUTSIDE_MASK_LABEL,
+                            p=1.0)
+img, msk = tsfm(image, mask=mask)
+```
+<img src="/Images/maskimage/maskimage.png" alt="MaskImage" width="300"/>
+
+If we run the same code with LABEL = 1 and OUTSIDE_MASK_LABEL = 0, then we can isolate the portion of the image that contained the mask, in this case the lungs.
+
+<img src="/Images/maskimage/maskout.png" alt="MaskOut" width="300"/>
