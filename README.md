@@ -167,4 +167,23 @@ tsfm = tr.BionomialBlur(repetition=3, p=1.0)
 img, msk = tsfm(image, mask=mask)
 ```
 
-12. 
+12. Noise
+* Salt and Pepper
+```python
+image = sitk.Cast(image, sitk.sitkInt32)
+min_value, max_value = -1, 3
+tsfm = tr.SaltPepperNoise(noise_prob=0.2,
+                                  noise_range=(min_value, max_value),
+                                  random_seed=1, p=1.0)
+img, msk = tsfm(image, mask=mask)
+```
+
+<img src="/Images/saltpepper/saltpepper.png" alt="saltpepper" width="300"/>
+
+* Gaussian
+```python
+tsfm = tr.AdditiveGaussianNoise(mean=0.0, std=1.0, p=1.0)
+img, msk = tsfm(image, mask=mask)
+```
+
+<img src="/Images/gaussian/gaussian.png" alt="gaussian" width="300"/>
