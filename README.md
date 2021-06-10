@@ -112,6 +112,7 @@ img, msk = tsfm(image=image, mask=mask)
 tsfm = tr.Invert(maximum=1, p=1.0)
 img, msk = tsfm(image, mask=mask)
 ```
+<img src="/Images/invert/invertintensity.png" alt="Invert" width="300"/>
 
 6. Clipping
 ```python
@@ -141,7 +142,10 @@ tsfm = tr.AdaptiveHistogramEqualization(alpha=1.0, beta=0.5,
 img, msk = tsfm(image, mask=mask)
 ```
 
+<img src="/Images/histogram/histogram.png" alt="Histogram" width="300"/>
+
 10. Mask Image
+
 This method allows for the masked and unmasked portions of an image to be isolated. This can be useful when there are large areas in the image that are not useful for a particular task, which can make it more difficult to train a model successfully.
 ```python
 LABEL = 0
