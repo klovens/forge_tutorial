@@ -208,15 +208,22 @@ First, we make a list of 5 potential transformations. More or fewer transformati
 tsfms = [tr.Affine(angles=45, translation=0, scale=1,
                          interpolator=sitk.sitkLinear, image_background=-1024,
                          mask_background=0, reference=None, p=0.5),
-                         tr.SaltPepperNoise(noise_prob=0.2,
-                                  noise_range=(min_value, max_value),
-                                  random_seed=1, p=0.75),  
-                         tr.RandomSegmentSafeCrop(crop_size=(250, 250, 75), include=[1], p=0.4),
-                         tr.BionomialBlur(repetition=3, p=0.75),
-                         tr.Invert(maximum=1, p=0.2)]
+         tr.SaltPepperNoise(noise_prob=0.2,
+                            noise_range=(min_value, max_value),
+                            random_seed=1, p=0.75),  
+         tr.RandomSegmentSafeCrop(crop_size=(250, 250, 75), include=[1], p=0.4),
+         tr.BionomialBlur(repetition=3, p=0.75),
+         tr.Invert(maximum=1, p=0.2)]
 
 print(tsfms)
-#[Affine (angles=[(-0.7853981633974483, 0.7853981633974483), (-0.7853981633974483, 0.7853981633974483), (-0.7853981633974483, 0.7853981633974483)], interpolator=2, p=0.5), SaltPepperNoise (noise_prob=0.2, random_seed=1, p=0.75), RandomSegmentSafeCrop (min size=[250 250 75], interesting segments=[1], p=0.4), BionomialBlur (repetition=3, p=0.75), Invert (maximum=1, p=0.2)]
+#[Affine (angles=[(-0.7853981633974483, 0.7853981633974483), 
+(-0.7853981633974483, 0.7853981633974483), (-0.7853981633974483, 
+0.7853981633974483)], interpolator=2, p=0.5), 
+SaltPepperNoise (noise_prob=0.2, random_seed=1, p=0.75), 
+RandomSegmentSafeCrop (min size=[250 250 75], 
+interesting segments=[1], p=0.4), 
+BionomialBlur (repetition=3, p=0.75), 
+Invert (maximum=1, p=0.2)]
 ```
 
 As shown in the variable tsfms, the transformations in the list are rotate, salt and pepper noise, random safe crop, blur, and invert.
@@ -231,6 +238,16 @@ img, msk = tsfm(image, mask=mask)
 ```
 Below are some potential images that could be obtained from selecting random transformations from our predefined list of transformations.
 
+**OneOf** will select only one transform from the list.
+```python
+tsfm = tr.OneOf(tsfms)
+img, msk = tsfm(image, mask=mask)
+```     
 
+**RandomOrder** will apply the transforms from the list in a random order. Equivalent to RandomChoices is K was set to 5 in this example and the original order is not kept (keep_original_order=False).
+```python
+tsfm = tr.RandomOrder(tsfms)
+img, msk = tsfm(image, mask=mask)
+```
 
 
