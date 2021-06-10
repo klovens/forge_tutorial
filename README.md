@@ -140,7 +140,7 @@ tsfm = tr.IntensityRangeTransfer(interval=(LOWER, UPPER),
 img, msk = tsfm(image, mask)
 ```
 
-<img src="/Images/rangetransfer/rangetransfer.png" alt="Transfer" width="300"/>
+<img src="/Images/rangetransfer/rangetransfer.png" alt="Transfer" width="700"/>
 
 9. Histogram Equalization
 ```python
