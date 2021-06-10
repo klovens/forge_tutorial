@@ -210,7 +210,7 @@ These augmentations can also be applied consecutively on the same image or a lis
 
 Each augmentation in this scenario has a probability attached to it, which is the likelihood of applying the transformation to a image/mask pair. Forge contains methods to request a particular number of augmentations be applied from a list as well as applying one or all of the augmentations in a predefined list provided by the user. Below we show an example of augmentations being applied to an image/mask consecutively.
 
-<img src="/Images/methods/randomselection.png" alt="randommethod" width="700"/>
+<img src="/Images/methods/transformationmethod2.png" alt="randommethod" width="700"/>
 
 First, we make a list of 5 potential transformations. More or fewer transformations could be included in this list depending on the kind of transformations a user wishes to apply to their images and masks. Furthermore, we are now changing the values of the parameter p, which is the probability of applying the transformation to an image/mask pair. In all previous examples we set p to 1 for all transformations meaning that the transformation would be applied in each case.
 
