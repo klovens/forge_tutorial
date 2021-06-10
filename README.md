@@ -44,3 +44,12 @@ tsfm = tr.Pad(PADING, method='constant', constant=CONSTANT,
 img, msk = tsfm(image, mask=mask)
 ```
 2. Masking the Foreground
+This method uses the Otsu method of thresholding in order to generate a mask for the parts of the image considered the foreground.
+```python
+tsfm = tr.ForegroundMask(background='<', bins=128)
+img, msk = tsfm(image)
+```
+The original image as well as the resulting image and mask overlayed are shown below.
+<img src="/Images/original/lung_original.png" alt="Original Image" width="250"/> <img src="/Images/foreground/otsu.png" alt="Original Mask" width="250"/>
+
+3. Cropping
