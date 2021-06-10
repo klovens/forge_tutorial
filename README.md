@@ -50,6 +50,7 @@ tsfm = tr.ForegroundMask(background='<', bins=128)
 img, msk = tsfm(image)
 ```
 The original image as well as the resulting image and mask overlayed are shown below.
+
 <img src="/Images/original/lung_original.png" alt="Original Image" width="250"/> <img src="/Images/foreground/otsu.png" alt="Original Mask" width="250"/>
 
 3. Cropping
