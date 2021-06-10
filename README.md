@@ -158,3 +158,13 @@ img, msk = tsfm(image, mask=mask)
 If we run the same code with LABEL = 1 and OUTSIDE_MASK_LABEL = 0, then we can isolate the portion of the image that contained the mask, in this case the lungs.
 
 <img src="/Images/maskimage/maskout.png" alt="MaskOut" width="300"/>
+
+
+11. Blur
+```python
+image = sitk.Cast(image, sitk.sitkInt32)
+tsfm = tr.BionomialBlur(repetition=3, p=1.0)
+img, msk = tsfm(image, mask=mask)
+```
+
+12. 
