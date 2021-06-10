@@ -23,11 +23,11 @@ Here, we provide a demonstration of many of the possible augmentations available
 import transform as tr
 reader = tr.ReadFromPath()
 image, mask = reader('image.nrrd', 'primary-seg.nrrd')
-
 ```
 
 The file path to the image is ‘image.nrrd’ and the path to the mask is ‘primary-seg.nrrd’. These parameters can be set to the path of your own image and mask for augmentation. The original image and corresponding mask we will be using for this tutorial are shown below:
 
+![Alt](Images/lung_original.png "Original Image")
 
 Note that we show a single 2D slice for the majority of the augmentations, but the image and mask can be visualized in 3D to view the entire transformation. 
 In this tutorial we will cover examples of many of the 3D augmentations available in the package as well as how to combine multiple transformations to apply to a single image and mask.
@@ -36,3 +36,13 @@ In this tutorial we will cover examples of many of the 3D augmentations availabl
 
 Currently, the available augmentations available using Forge include:
 
+1. Padding
+```python
+PADING = [20, 20, 20]
+CONSTANT = 1024
+tsfm = tr.Pad(PADING, method='constant', constant=CONSTANT,
+                      background_label=0, pad_lower_bound=True,
+                      pad_upper_bound=True, p=1.0)
+img, msk = tsfm(image, mask=mask)
+```
+2. Masking the Foreground
