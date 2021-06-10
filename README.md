@@ -166,6 +166,7 @@ image = sitk.Cast(image, sitk.sitkInt32)
 tsfm = tr.BionomialBlur(repetition=3, p=1.0)
 img, msk = tsfm(image, mask=mask)
 ```
+<img src="/Images/blur/blur.png" alt="Blur" width="300"/>
 
 12. Noise
 * Salt and Pepper
