@@ -56,7 +56,7 @@ The original image as well as the resulting image and mask overlayed are shown b
 
 3. Cropping
 
-There are several techniques to crop the images and masks. Random crop will crop an image randomly, but with a specific size while center crop will crop at the center of the image (and mask if provided). Random safe crop will ensure that at least some of the regions of interest (specified by having a mask) will be retained when the image is cropped. If not using safe crop, the cropped area may not include any part of the mask. The size of the cropped area is specified using a tuple containing the x, y, and z dimensions desired for the cropped area. Below we demonstrate how to call these particular transformations.
+There are several techniques to crop the images and masks. Random crop will crop an image randomly, but with a specific size while center crop will crop at the center of the image (and mask if provided). Random safe crop will ensure that at least some of the regions of interest (specified by having a mask) will be retained when the image is cropped. If not using safe crop, the cropped area may not include any part of the mask. The size of the cropped area is specified using a tuple containing the x, y, and z dimensions desired for the cropped area. Below we demonstrate how to call these particular transformations. The images shown include the axial, sagital, and coronal views of the image/mask pair, respectively.
 
 * Random Crop
 ```python
@@ -211,17 +211,26 @@ tsfms = [tr.Affine(angles=45, translation=0, scale=1,
                          tr.SaltPepperNoise(noise_prob=0.2,
                                   noise_range=(min_value, max_value),
                                   random_seed=1, p=0.75),  
-                         tr.RandomSegmentSafeCrop(crop_size=(250, 250, 250), include=[1], p=0.4),
+                         tr.RandomSegmentSafeCrop(crop_size=(250, 250, 75), include=[1], p=0.4),
                          tr.BionomialBlur(repetition=3, p=0.75),
                          tr.Invert(maximum=1, p=0.2)]
 
 print(tsfms)
-#[Affine (angles=[(-0.7853981633974483, 0.7853981633974483), (-0.7853981633974483, 0.7853981633974483), (-0.7853981633974483, 0.7853981633974483)], interpolator=2, p=0.5), SaltPepperNoise (noise_prob=0.2, random_seed=1, p=0.75), RandomSegmentSafeCrop (min size=[250 250 250], interesting segments=[1], p=0.4), BionomialBlur (repetition=3, p=0.75), Invert (maximum=1, p=0.2)]
+#[Affine (angles=[(-0.7853981633974483, 0.7853981633974483), (-0.7853981633974483, 0.7853981633974483), (-0.7853981633974483, 0.7853981633974483)], interpolator=2, p=0.5), SaltPepperNoise (noise_prob=0.2, random_seed=1, p=0.75), RandomSegmentSafeCrop (min size=[250 250 75], interesting segments=[1], p=0.4), BionomialBlur (repetition=3, p=0.75), Invert (maximum=1, p=0.2)]
 ```
 
 As shown in the variable tsfms, the transformations in the list are rotate, salt and pepper noise, random safe crop, blur, and invert.
 
-Compose will apply the transforms sequentially to the image and mask.
+**Compose** will apply the transforms sequentially to the image and mask.
+
+**RandomChoices** will select transforms from the list of possible transforms. As an example, lets select 3 random transforms from the list to potentially apply to our image/mask.
+```python
+K = 3
+tsfm = tr.RandomChoices(tsfms, k=K, keep_original_order=True)
+img, msk = tsfm(image, mask=mask)
+```
+Below are some potential images that could be obtained from selecting random transformations from our predefined list of transformations.
+
 
 
 
