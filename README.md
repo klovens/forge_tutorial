@@ -44,6 +44,7 @@ tsfm = tr.Pad(PADING, method='constant', constant=CONSTANT,
 img, msk = tsfm(image, mask=mask)
 ```
 2. Masking the Foreground
+3. 
 This method uses the Otsu method of thresholding in order to generate a mask for the parts of the image considered the foreground.
 ```python
 tsfm = tr.ForegroundMask(background='<', bins=128)
