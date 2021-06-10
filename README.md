@@ -129,6 +129,8 @@ tsfm = tr.IsolateRange(lower_bound=LOWER,
 img, msk = tsfm(image, mask=mask)
 ```
 
+<img src="/Images/clipping/clipping.png" alt="Clip" width="700"/>
+
 7. Intensity Range Transfer
 ```python
 LOWER = 0
@@ -137,6 +139,9 @@ tsfm = tr.IntensityRangeTransfer(interval=(LOWER, UPPER),
                                          cast=None, p=1.0)
 img, msk = tsfm(image, mask)
 ```
+
+<img src="/Images/rangetransfer/rangetransfer.png" alt="Transfer" width="300"/>
+
 9. Histogram Equalization
 ```python
 tsfm = tr.AdaptiveHistogramEqualization(alpha=1.0, beta=0.5,
