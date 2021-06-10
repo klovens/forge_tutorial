@@ -55,13 +55,12 @@ The original image as well as the resulting image and mask overlayed are shown b
 <img src="/Images/original/lung_original.png" alt="Original Image" width="250"/> <img src="/Images/foreground/otsu.png" alt="Original Mask" width="250"/>
 
 3. Cropping
-
-a. Random Crop
+* Random Crop
 ```python
 size = (250, 250, 50)
 tsfm = tr.RandomCrop(size, p=1)
 img, msk = tsfm(image, mask)
 ```
 
-<img src="/Images/crop/randomcrop.png" alt="Random Crop" width="400"/>
+<img src="/Images/crop/randomcrop.png" alt="Random Crop" width="700"/>
 
