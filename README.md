@@ -187,3 +187,16 @@ img, msk = tsfm(image, mask=mask)
 ```
 
 <img src="/Images/gaussian/gaussian.png" alt="gaussian" width="300"/>
+
+13. Resizing
+14. Flipping
+Visualizing in applications such as 3d Slicer will not show flipping properly so we visualize these image and masks using matplotlib. A list of 3 Boolean values indicate the axes that the image and mask (if provided) should be flipped. Here, we are flipping the image and mask around the y axis.
+
+```python
+tsfm = tr.Flip(axes=[False, True, False], p=1)
+img, msk = tsfm(image=image, mask=mask)
+```
+
+## Combining a Set of Augmentations/Transformations
+
+These augmentations can also be applied consecutively on the same image or a list of possible augmentations can be applied in a probabilistic fashion. The figures below represent these types of combined transformations.
