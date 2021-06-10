@@ -115,14 +115,16 @@ img, msk = tsfm(image, mask=mask)
 <img src="/Images/invert/invertintensity.png" alt="Invert" width="300"/>
 
 6. Clipping
+
+Clipping will extract any intensity value in the image between an upper and a lower bound. From the voxels that fulfill this criteria the mask can be recalculated to only mask the voxels that are within this intesity range and part of the original mask.
 ```python
 LOWER = 0
-UPPER = 150
+UPPER = 500
 OUTSIDE = 0
 tsfm = tr.IsolateRange(lower_bound=LOWER,
                                upper_bound=UPPER,
                                image_outside_value=OUTSIDE,
-                               recalculate_mask=False,
+                               recalculate_mask=True,
                                p=1.0)
 img, msk = tsfm(image, mask=mask)
 ```
@@ -130,7 +132,7 @@ img, msk = tsfm(image, mask=mask)
 7. Intensity Range Transfer
 ```python
 LOWER = 0
-UPPER = 1
+UPPER = 10
 tsfm = tr.IntensityRangeTransfer(interval=(LOWER, UPPER),
                                          cast=None, p=1.0)
 img, msk = tsfm(image, mask)
