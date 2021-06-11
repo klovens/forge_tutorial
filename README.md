@@ -249,7 +249,7 @@ tsfm = tr.BinaryDilate(background=0, foreground=1,
 img, msk = tsfm(image=image, mask=mask)
 ```
 
-<img src="/Images/resize/originaltumorseg.png" alt="origtumor" width="300"/><img src="/Images/resize/erode.png" alt="randommethod" width="300"/><img src="/Images/resize/dilate.png" alt="randommethod" width="300"/>
+<img src="/Images/resize/originaltumorseg.png" alt="origtumor" width="200"/><img src="/Images/resize/erode.png" alt="randommethod" width="200"/><img src="/Images/resize/dilate.png" alt="randommethod" width="200"/><img src="/Images/resize/alltumorsegs.png" alt="randommethod" width="200"/>
 
 15. Flipping
 
