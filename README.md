@@ -231,7 +231,22 @@ img, msk = tsfm(image, mask=mask)
 >>> mask.GetSize()
 (512, 512, 140)
 ```
-Further, the mask alone can be resized in order to segment less or more of the area of interest.
+
+Further, the mask alone can be resized in order to segment less or more of the area of interest. Two methods are available to increase or decrease the overall area of the mask. To demonstrate when this may be useful, we make use of a image and mask from the NSCLC-Radiomics dataset from TCIA available [here](https://wiki.cancerimagingarchive.net/display/Public/NSCLC-Radiomics). Increasing or decreasing the mask of a tumor area may be desired if the boundaries around the tumors tend to be unclear. Features may be included and excluded from the mask area to determine how informative they are for endpoint prediction.
+
+**Erode**
+```python
+tsfm = BinaryErode(background: int = 0, foreground: int = 1,
+                 radius: Tuple[int, int, int] = (1, 1, 1))
+img, msk = tsfm(image=image, mask=mask)
+```
+
+**Dilate**
+```python
+tsfm = BinaryDilate(background: int = 0, foreground: int = 1,
+                 radius: Tuple[int, int, int] = (1, 1, 1))
+img, msk = tsfm(image=image, mask=mask)
+```
 
 15. Flipping
 
