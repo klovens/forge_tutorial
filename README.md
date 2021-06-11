@@ -238,16 +238,18 @@ Further, the mask alone can be resized in order to segment less or more of the a
 ```python
 image, mask = reader('image_tumor.nrrd','primary-tumor.nrrd')
 tsfm = tr.BinaryErode(background=0, foreground=1,
-                 radius= (20, 20, 20))
+                 radius= (5, 5, 1))
 img, msk = tsfm(image=image, mask=mask)
 ```
 
 **Dilate**
 ```python
 tsfm = tr.BinaryDilate(background=0, foreground=1,
-                 radius= (20, 20, 20))
+                 radius= (5, 5, 2))
 img, msk = tsfm(image=image, mask=mask)
 ```
+
+<img src="/Images/resize/originaltumorseg.png" alt="origtumor" width="300"/><img src="/Images/resize/erode.png" alt="randommethod" width="300"/><img src="/Images/resize/dilate.png" alt="randommethod" width="300"/>
 
 15. Flipping
 
