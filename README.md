@@ -251,6 +251,8 @@ img, msk = tsfm(image=image, mask=mask)
 
 <img src="/Images/resize/originaltumorseg.png" alt="origtumor" width="200"/><img src="/Images/resize/erode.png" alt="randommethod" width="200"/><img src="/Images/resize/dilate.png" alt="randommethod" width="200"/><img src="/Images/resize/alltumorsegs.png" alt="randommethod" width="200"/>
 
+From left to right, the images above show the original tumor segmentation (green), the resulting mask after erosion is applied (red), the mask after dilate is applied (yellow), and all of the segmentations layered to show the difference between their boundaries before and after the transformations have been applied.
+
 15. Flipping
 
 Visualizing in applications such as 3d Slicer will not show flipping properly so we visualize these image and masks using matplotlib. A list of 3 Boolean values indicate the axes that the image and mask (if provided) should be flipped. Here, we are flipping the image and mask around the y axis.
@@ -259,6 +261,7 @@ Visualizing in applications such as 3d Slicer will not show flipping properly so
 tsfm = tr.Flip(axes=[False, True, False], p=1)
 img, msk = tsfm(image=image, mask=mask)
 ```
+<img src="/Images/flip/fliporiginal.png" alt="origtumor" width="300"/><img src="/Images/flip/flipimage.png" alt="origtumor" width="300"/><img src="/Images/flip/flipmask.png" alt="origtumor" width="300"/>
 
 ## Combining a Set of Augmentations/Transformations
 
