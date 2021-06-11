@@ -261,7 +261,7 @@ Visualizing in applications such as 3d Slicer will not show flipping properly so
 tsfm = tr.Flip(axes=[False, True, False], p=1)
 img, msk = tsfm(image=image, mask=mask)
 ```
-<img src="/Images/flip/fliporiginal.png" alt="origtumor" width="300"/><img src="/Images/flip/flipimage.png" alt="origtumor" width="300"/><img src="/Images/flip/flipmask.png" alt="origtumor" width="300"/>
+<img src="/Images/flip/fliporiginal.png" alt="origtumor" width="250"/><img src="/Images/flip/flipimage.png" alt="origtumor" width="250"/><img src="/Images/flip/flipmask.png" alt="origtumor" width="250"/>
 
 ## Combining a Set of Augmentations/Transformations
 
