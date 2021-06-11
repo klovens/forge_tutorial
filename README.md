@@ -56,7 +56,7 @@ The original image as well as the resulting image and mask overlayed are shown b
 
 3. Cropping
 
-There are several techniques to crop the images and masks. Random crop will crop an image randomly, but with a specific size while center crop will crop at the center of the image (and mask if provided). Random safe crop will ensure that at least some of the regions of interest (specified by having a mask) will be retained when the image is cropped. If not using safe crop, the cropped area may not include any part of the mask. The size of the cropped area is specified using a tuple containing the x, y, and z dimensions desired for the cropped area. Below we demonstrate how to call these particular transformations. The images shown include the axial, sagital, and coronal views of the image/mask pair, respectively.
+There are several techniques to crop the images and masks. These methods can be useful for applications that involve techniques such as curriculum learning strategies in order to focus on a region of interest without the added complexity of surrounding tissue. Random crop will crop an image randomly, but with a specific size while center crop will crop at the center of the image (and mask if provided). Random safe crop will ensure that at least some of the regions of interest (specified by having a mask) will be retained when the image is cropped. If not using safe crop, the cropped area may not include any part of the mask. The size of the cropped area is specified using a tuple containing the x, y, and z dimensions desired for the cropped area. Below we demonstrate how to call these particular transformations. The images shown include the axial, sagital, and coronal views of the image/mask pair, respectively.
 
 * Random Crop
 ```python
