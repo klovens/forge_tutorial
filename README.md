@@ -236,15 +236,16 @@ Further, the mask alone can be resized in order to segment less or more of the a
 
 **Erode**
 ```python
-tsfm = BinaryErode(background: int = 0, foreground: int = 1,
-                 radius: Tuple[int, int, int] = (1, 1, 1))
+image, mask = reader('image_tumor.nrrd','primary-tumor.nrrd')
+tsfm = tr.BinaryErode(background=0, foreground=1,
+                 radius= (20, 20, 20))
 img, msk = tsfm(image=image, mask=mask)
 ```
 
 **Dilate**
 ```python
-tsfm = BinaryDilate(background: int = 0, foreground: int = 1,
-                 radius: Tuple[int, int, int] = (1, 1, 1))
+tsfm = tr.BinaryDilate(background=0, foreground=1,
+                 radius= (20, 20, 20))
 img, msk = tsfm(image=image, mask=mask)
 ```
 
