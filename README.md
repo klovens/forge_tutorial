@@ -118,7 +118,7 @@ img, msk = tsfm(image, mask=mask)
 
 Clipping will extract any intensity value in the image between an upper and a lower bound. From the voxels that fulfill this criteria the mask can be recalculated to only mask the voxels that are within this intesity range and part of the original mask.
 ```python
-LOWER = 0
+LOWER = -1038
 UPPER = 500
 OUTSIDE = 0
 tsfm = tr.IsolateRange(lower_bound=LOWER,
