@@ -12,7 +12,7 @@ In order to ensure that the package is working on your system, tests can be run 
 
 
 ```
-python test_transform.py
+python run_tests.py
 ```
 
 Here, we provide a demonstration of many of the possible augmentations available in the package as well as different techniques that may be used to apply and combine augmentations. In order to visualize these augmentations, we utilize the Lung 2017 whole lung segmentation dataset from TCIA available [here](https://wiki.cancerimagingarchive.net/display/Public/Lung+CT+Segmentation+Challenge+2017). We isolated the lung segmentations from this dataset as a binary mask in order to simplify the visualizations. The image and mask from can be loaded as follows.
@@ -315,6 +315,10 @@ print(tsfms)
 As shown in the variable tsfms, the transformations in the list are rotate, salt and pepper noise, random safe crop, blur, and invert.
 
 **Compose** will apply the transforms sequentially to the image and mask.
+```python
+tsfm = tr.Compose(tsfms)
+img, msk = tsfm(image, mask=mask)
+```
 
 **RandomChoices** will select transforms from the list of possible transforms. As an example, lets select 3 random transforms from the list to potentially apply to our image/mask.
 ```python
