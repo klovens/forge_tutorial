@@ -35,6 +35,8 @@ In this tutorial we will cover examples of many of the 3D augmentations availabl
 Currently, the available augmentations available using Forge include:
 
 1. Padding
+
+Padding adds a specified amount of pixels to an image. In order to demonstrate padding clearly, we set the intensity of the pixels to a value that will stand out from the background.
 ```python
 PADING = [20, 20, 20]
 CONSTANT = 1024
@@ -43,6 +45,8 @@ tsfm = tr.Pad(PADING, method='constant', constant=CONSTANT,
                       pad_upper_bound=True, p=1.0)
 img, msk = tsfm(image, mask=mask)
 ```
+<img src="/Images/pad/pad.png" alt="Padded Image" width="250"/>
+
 2. Masking the Foreground
 
 This method uses the Otsu method of thresholding in order to generate a mask for the parts of the image considered the foreground.
