@@ -346,7 +346,7 @@ img, msk = tsfm(image, mask=mask)
 
 To write any image or mask created from the transformations to a file the **Writer** class can be used.
 ```python
-wr = Writer(dir_path='.', image_prefix='image', image_postfix='',
+wr = tr.Writer(dir_path='.', image_prefix='image', image_postfix='',
             mask_prefix='mask', mask_postfix='', extension='nrrd')
 wr(image=img, mask=msk)
 ```
