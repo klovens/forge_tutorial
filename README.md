@@ -291,13 +291,13 @@ Resample and image (mask optional) according to specified origin, spacing and di
 resample = tr.Resample()
 img, msk = resample(image, mask)
 
-img.GetSpacing()
-# (1.0, 1.0, 1.0)
+>>> img.GetSpacing()
+(1.0, 1.0, 1.0)
 
-img.GetOrigin()
-# (-249.51171875, -440.51171875, -655.0)
+>>> img.GetOrigin()
+(-249.51171875, -440.51171875, -655.0)
 
-img.getSize()
+>>> img.getSize()
 
 resample = tr.Resample(interpolator=sitk.sitkBSpline,
                  output_spacing: tuple = (1, 1, 2),
@@ -315,20 +315,20 @@ img, msk = resample(image, mask)
 
 This method can make an image (with or without a mask) isotropic, i.e. equally spaced in all directions. We show the original spacing followed by the spacing after applying the method. 
 ```python
-image.GetSize()
-# (512, 512, 140)
+>>> image.GetSize()
+(512, 512, 140)
 
-image.GetSpacing()
-# (0.9765625, 0.9765625, 3.0)
+>>> image.GetSpacing()
+(0.9765625, 0.9765625, 3.0)
 
 ist = tr.Isotropic()
 img, _ = ist(image)
 
-img.GetSize()
-# (500, 500, 420)
+>>> img.GetSize()
+(500, 500, 420)
 
-img.GetSpacing()
-# (1.0, 1.0, 1.0)
+>>> img.GetSpacing()
+(1.0, 1.0, 1.0)
 
 img, msk = ist(image, mask)
 ```
