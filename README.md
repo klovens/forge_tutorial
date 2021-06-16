@@ -19,7 +19,7 @@ Here, we provide a demonstration of many of the possible augmentations available
 
 ```python
 import transform as tr
-reader = tr.ReadFromPath()
+reader = tr.Reader()
 image, mask = reader('image.nrrd', 'primary-seg.nrrd')
 ```
 
