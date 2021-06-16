@@ -39,9 +39,21 @@ img, msk = resample(image, mask)
 img.GetSpacing()
 # (1.0, 1.0, 1.0)
 
-img.GetDimensions()
+img.GetOrigin()
+# (-249.51171875, -440.51171875, -655.0)
 
 img.getSize()
+
+resample = tr.Resample(interpolator=sitk.sitkBSpline,
+                 output_spacing: tuple = (1, 1, 2),
+                 default_image_voxel_value=0,
+                 default_mask_voxel_value=0,
+                 output_image_voxel_type=None,
+                 output_mask_voxel_type=None,
+                 output_direction=None,
+                 output_origin=None)
+                 
+img, msk = resample(image, mask)
 ```
 
 **Isotropic**
