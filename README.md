@@ -27,58 +27,6 @@ The file path to the image is ‘image.nrrd’ and the path to the mask is ‘pr
 
 <img src="/Images/original/lung_original.png" alt="Original Image" width="250"/> <img src="/Images/original/lung_mask_only.png" alt="Original Mask" width="250"/> <img src="/Images/original/lung_overlay.png" alt="Original Overlay" width="250"/>
 
-Forge includes methods that allow for fixing pixel spacing issues andd general inconsistencies that may arise when analysing and work with images and their segmentations.
-
-**Resample**
-
-Resample and image (mask optional) according to specified origin, spacing and dimensions. The method will transform the image by mapping the points from the original coordinate system to the new specified coordinate system by the user (or default system). An Interpolator is used to obtain the intensity values at arbitrary points in the coordinate system from the values of the points defined by the Image.
-```python
-resample = tr.Resample()
-img, msk = resample(image, mask)
-
-img.GetSpacing()
-# (1.0, 1.0, 1.0)
-
-img.GetOrigin()
-# (-249.51171875, -440.51171875, -655.0)
-
-img.getSize()
-
-resample = tr.Resample(interpolator=sitk.sitkBSpline,
-                 output_spacing: tuple = (1, 1, 2),
-                 default_image_voxel_value=0,
-                 default_mask_voxel_value=0,
-                 output_image_voxel_type=None,
-                 output_mask_voxel_type=None,
-                 output_direction=None,
-                 output_origin=None)
-                 
-img, msk = resample(image, mask)
-```
-
-**Isotropic**
-
-This method can make an image (with or without a mask) isotropic, i.e. equally spaced in all directions. We show the original spacing followed by the spacing after applying the method. 
-```python
-image.GetSize()
-# (512, 512, 140)
-
-image.GetSpacing()
-# (0.9765625, 0.9765625, 3.0)
-
-ist = tr.Isotropic()
-img, _ = ist(image)
-
-img.GetSize()
-# (500, 500, 420)
-
-img.GetSpacing()
-# (1.0, 1.0, 1.0)
-
-img, msk = ist(image, mask)
-```
-Further, this should not make the image and mask look significantly different
-
 Note that we show a single 2D slice for the majority of the augmentations, but the image and mask can be visualized in 3D to view the entire transformation. 
 In this tutorial we will cover examples of many of the 3D augmentations available in the package as well as how to combine multiple transformations to apply to a single image and mask.
 
@@ -331,6 +279,60 @@ tsfm = tr.Flip(axes=[False, True, False], p=1)
 img, msk = tsfm(image=image, mask=mask)
 ```
 <img src="/Images/flip/fliporiginal.png" alt="origtumor" width="250"/><img src="/Images/flip/flipimage.png" alt="origtumor" width="250"/><img src="/Images/flip/flipmask.png" alt="origtumor" width="250"/>
+
+16. Resampling
+
+Forge includes methods that allow for fixing pixel spacing issues andd general inconsistencies that may arise when analysing and work with images and their segmentations.
+
+**Resample**
+
+Resample and image (mask optional) according to specified origin, spacing and dimensions. The method will transform the image by mapping the points from the original coordinate system to the new specified coordinate system by the user (or default system). An Interpolator is used to obtain the intensity values at arbitrary points in the coordinate system from the values of the points defined by the Image.
+```python
+resample = tr.Resample()
+img, msk = resample(image, mask)
+
+img.GetSpacing()
+# (1.0, 1.0, 1.0)
+
+img.GetOrigin()
+# (-249.51171875, -440.51171875, -655.0)
+
+img.getSize()
+
+resample = tr.Resample(interpolator=sitk.sitkBSpline,
+                 output_spacing: tuple = (1, 1, 2),
+                 default_image_voxel_value=0,
+                 default_mask_voxel_value=0,
+                 output_image_voxel_type=None,
+                 output_mask_voxel_type=None,
+                 output_direction=None,
+                 output_origin=None)
+                 
+img, msk = resample(image, mask)
+```
+
+**Isotropic**
+
+This method can make an image (with or without a mask) isotropic, i.e. equally spaced in all directions. We show the original spacing followed by the spacing after applying the method. 
+```python
+image.GetSize()
+# (512, 512, 140)
+
+image.GetSpacing()
+# (0.9765625, 0.9765625, 3.0)
+
+ist = tr.Isotropic()
+img, _ = ist(image)
+
+img.GetSize()
+# (500, 500, 420)
+
+img.GetSpacing()
+# (1.0, 1.0, 1.0)
+
+img, msk = ist(image, mask)
+```
+Further, this should not make the image and mask look significantly different
 
 ## Combining a Set of Augmentations/Transformations
 
