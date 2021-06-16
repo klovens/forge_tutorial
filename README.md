@@ -342,4 +342,13 @@ tsfm = tr.RandomOrder(tsfms)
 img, msk = tsfm(image, mask=mask)
 ```
 
+## Write to a file
+
+To write any image or mask created from the transformations to a file the **Writer** class can be used.
+```python
+wr = Writer(dir_path='.', image_prefix='image', image_postfix='',
+            mask_prefix='mask', mask_postfix='', extension='nrrd')
+wr(image=img, mask=msk)
+```
+
 
