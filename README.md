@@ -30,12 +30,18 @@ The file path to the image is ‘image.nrrd’ and the path to the mask is ‘pr
 Forge includes methods that allow for fixing pixel spacing issues andd general inconsistencies that may arise when analysing and work with images and their segmentations.
 
 **Resample**
+
+Resample and image (mask optional) according to specified origin, spacing and dimensions. The method will transform the image by mapping the points from the original coordinate system to the new specified coordinate system by the user (or default system). An Interpolator is used to obtain the intensity values at arbitrary points in the coordinate system from the values of the points defined by the Image.
 ```python
 resample = tr.Resample()
 img, msk = resample(image, mask)
 
 img.GetSpacing()
 # (1.0, 1.0, 1.0)
+
+img.GetDimensions()
+
+img.getSize()
 ```
 
 **Isotropic**
