@@ -10,7 +10,6 @@ Forge requires torch and SimpleITK.
 
 In order to ensure that the package is working on your system, tests can be run as follows.
 
-
 ```
 python run_tests.py
 ```
