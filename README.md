@@ -90,7 +90,7 @@ img, msk = tsfm(image, mask=mask)
 
 4. Rotating
 
-Rotate the given CT image by constant value x, y, z angles. These angles can be specified as a tuple. If all the angles are equal, providing a single value for the angle is sufficient. Below we show both ways to provide the angles for the rotation.
+Rotate the given CT image by constant value x, y, z angles. These angles can be specified as a tuple. If all the angles are equal, providing a single value for the angle is sufficient. Below we show both ways to provide the angles for the rotation. Scaling and translation is also possible.
 
 ```python
 tsfm = tr.Affine(angles=(180, 180, 180), translation=0, scale=1,
@@ -108,6 +108,22 @@ tsfm = tr.Affine(angles=45, translation=0, scale=1,
 img, msk = tsfm(image=image, mask=mask)
 ```
 
+<img src="/Images/rotate/rotate45.png" alt="Rotate 180" width="700"/>
+
+In this example we scale by 2 meaning the dimensions of the mask and image should be half of the original mask and image.
+
+```python
+SCALE = (2, 2, 2)
+tsfm = tr.Affine(angles=(180, 180, 1), translation=(0, 0, 0), 
+                 scales=SCALE,interpolator=sitk.sitkBSpline, image_background=-1024,
+                 mask_background=0, reference=None, reshape=True)
+img, msk = tsfm(image=image, mask=mask)
+
+>>> img.GetSize()
+(260, 260, 70)
+>>> msk.GetSize()
+(260, 260, 70)
+```
 <img src="/Images/rotate/rotate45.png" alt="Rotate 180" width="700"/>
 
 5. Invert Intensity
