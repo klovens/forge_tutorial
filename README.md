@@ -124,7 +124,6 @@ img, msk = tsfm(image=image, mask=mask)
 >>> msk.GetSize()
 (260, 260, 70)
 ```
-<img src="/Images/rotate/rotate45.png" alt="Rotate 180" width="700"/>
 
 5. Invert Intensity
 ```python
