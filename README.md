@@ -92,24 +92,6 @@ img, msk = tsfm(image, mask=mask)
 
 Rotate the given CT image by constant value x, y, z angles. These angles can be specified as a tuple. If all the angles are equal, providing a single value for the angle is sufficient. Below we show both ways to provide the angles for the rotation. Scaling and translation is also possible.
 
-```python
-tsfm = tr.Affine(angles=(180, 180, 180), translation=0, scale=1,
-                         interpolator=sitk.sitkLinear, image_background=-1024,
-                         mask_background=0, reference=None, p=1)
-img, msk = tsfm(image=image, mask=mask)
-```
-
-<img src="/Images/rotate/rotate180.png" alt="Rotate 180" width="700"/>
-
-```python
-tsfm = tr.Affine(angles=45, translation=0, scale=1,
-                         interpolator=sitk.sitkLinear, image_background=-1024,
-                         mask_background=0, reference=None, p=1)
-img, msk = tsfm(image=image, mask=mask)
-```
-
-<img src="/Images/rotate/rotate45.png" alt="Rotate 180" width="700"/>
-
 In this example we scale by 2 meaning the dimensions of the mask and image should be half of the original mask and image.
 
 ```python
@@ -135,20 +117,6 @@ img, msk = tsfm(image, mask=mask)
 6. Clipping
 
 Clipping will extract any intensity value in the image between an upper and a lower bound. From the voxels that fulfill this criteria the mask can be recalculated to only mask the voxels that are within this intesity range and part of the original mask.
-```python
-LOWER = 0
-UPPER = 500
-OUTSIDE = 0
-tsfm = tr.IsolateRange(lower_bound=LOWER,
-                               upper_bound=UPPER,
-                               image_outside_value=OUTSIDE,
-                               recalculate_mask=True,
-                               p=1.0)
-img, msk = tsfm(image, mask=mask)
-```
-
-<img src="/Images/clipping/clipping.png" alt="Clip" width="700"/>
-
 ```python
 LOWER = -1038
 UPPER = 1
@@ -186,8 +154,8 @@ img, msk = tsfm(image, mask=mask)
 
 This method allows for the masked and unmasked portions of an image to be isolated. This can be useful when there are large areas in the image that are not useful for a particular task, which can make it more difficult to train a model successfully.
 ```python
-LABEL = 0
-OUTSIDE_MASK_LABEL = 1
+LABEL = 1
+OUTSIDE_MASK_LABEL = 0
 BACKGROUND = -1024
 tsfm = tr.MaskImage(segment_label=LABEL,
                             image_outside_value=BACKGROUND,
@@ -197,7 +165,7 @@ img, msk = tsfm(image, mask=mask)
 ```
 <img src="/Images/maskimage/maskimage.png" alt="MaskImage" width="300"/>
 
-If we run the same code with LABEL = 1 and OUTSIDE_MASK_LABEL = 0, then we can isolate the portion of the image that contained the mask, in this case the lungs.
+If we run the same code with LABEL = 0 and OUTSIDE_MASK_LABEL = 1, then we can isolate the portion of the image that contained the mask, in this case the lungs.
 
 <img src="/Images/maskimage/maskout.png" alt="MaskOut" width="300"/>
 
@@ -214,8 +182,8 @@ img, msk = tsfm(image, mask=mask)
 * Salt and Pepper
 ```python
 image = sitk.Cast(image, sitk.sitkInt32)
-min_value, max_value = -1, 3
-tsfm = tr.SaltPepperNoise(noise_prob=0.2,
+min_value, max_value = -1038, 200
+tsfm = tr.SaltPepperNoise(noise_prob=0.1,
                                   noise_range=(min_value, max_value),
                                   random_seed=1, p=1.0)
 img, msk = tsfm(image, mask=mask)
@@ -236,12 +204,12 @@ img, msk = tsfm(image, mask=mask)
 Resizing can be done in various ways using Forge. The image/mask can expand or shrink by a factor or the they can be resized to a particular dimension using Resize as shown.
 ```python
 output_size = [2 * x for x in image.GetSize()]
-              tsfm = tr.Resize(size=output_size,
+tsfm = tr.Resize(size=output_size,
                          interpolator=sitk.sitkLinear,
                          default_image_voxel_value=0,
                          default_mask_voxel_value=0,
                          p=1.0)
- img, msk = tsfm(image, mask=mask)
+img, msk = tsfm(image, mask=mask)
 ```
 
 We do not show the visualizations for resizing here as it is not obvious other than the resolution going up or down (looks similar to blur when shrinking, for example). However, we can confirm that the dimensions of the image and mask have changed.
@@ -311,7 +279,7 @@ img, msk = resample(image, mask)
 >>> img.GetOrigin()
 (-249.51171875, -440.51171875, -655.0)
 
->>> img.getSize()
+>>> img.GetSize()
 
 resample = tr.Resample(interpolator=sitk.sitkBSpline,
                  output_spacing: tuple = (1, 1, 2),
