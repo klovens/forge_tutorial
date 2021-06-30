@@ -24,7 +24,7 @@ image, mask = reader('image.nrrd', 'primary-seg.nrrd')
 
 The file path to the image is ‘image.nrrd’ and the path to the mask is ‘primary-seg.nrrd’. These parameters can be set to the path of your own image and mask for augmentation. The original image and corresponding mask we will be using for this tutorial are shown below:
 
-<img src="/Images/original/lung_original.png" alt="Original Image" width="250"/> <img src="/Images/original/lung_mask_only.png" alt="Original Mask" width="250"/> <img src="/Images/original/lung_overlay.png" alt="Original Overlay" width="250"/>
+<img src="/Images/original/lung_original.png" alt="Original Image" width="200"/> <img src="/Images/original/lung_mask_only.png" alt="Original Mask" width="200"/> <img src="/Images/original/lung_overlay.png" alt="Original Overlay" width="200"/>
 
 Note that we show a single 2D slice for the majority of the augmentations, but the image and mask can be visualized in 3D to view the entire transformation. 
 In this tutorial we will cover examples of many of the 3D augmentations available in the package as well as how to combine multiple transformations to apply to a single image and mask.
@@ -248,7 +248,7 @@ tsfm = tr.BinaryDilate(background=0, foreground=1,
 img, msk = tsfm(image=image, mask=mask)
 ```
 
-<img src="/Images/resize/originaltumorseg.png" alt="origtumor" width="200"/><img src="/Images/resize/erode.png" alt="randommethod" width="200"/><img src="/Images/resize/dilate.png" alt="randommethod" width="200"/><img src="/Images/resize/alltumorsegs.png" alt="randommethod" width="200"/>
+<img src="/Images/resize/originaltumorseg.png" alt="origtumor" width="150"/><img src="/Images/resize/erode.png" alt="randommethod" width="150"/><img src="/Images/resize/dilate.png" alt="randommethod" width="150"/><img src="/Images/resize/alltumorsegs.png" alt="randommethod" width="150"/>
 
 From left to right, the images above show the original tumor segmentation (green), the resulting mask after erosion is applied (red), the mask after dilate is applied (yellow), and all of the segmentations layered to show the difference between their boundaries before and after the transformations have been applied.
 
@@ -260,7 +260,7 @@ Visualizing in applications such as 3d Slicer will not show flipping properly so
 tsfm = tr.Flip(axes=[False, True, False], p=1)
 img, msk = tsfm(image=image, mask=mask)
 ```
-<img src="/Images/flip/fliporiginal.png" alt="origtumor" width="250"/><img src="/Images/flip/flipimage.png" alt="origtumor" width="250"/><img src="/Images/flip/flipmask.png" alt="origtumor" width="250"/>
+<img src="/Images/flip/fliporiginal.png" alt="origtumor" width="200"/><img src="/Images/flip/flipimage.png" alt="origtumor" width="200"/><img src="/Images/flip/flipmask.png" alt="origtumor" width="200"/>
 
 16. Resampling
 
@@ -314,7 +314,7 @@ img, _ = ist(image)
 
 img, msk = ist(image, mask)
 ```
-Further, this should not make the image and mask look significantly different
+Further, this should not make the image and mask look significantly different.
 
 ## Combining a Set of Augmentations/Transformations
 
@@ -364,7 +364,7 @@ img, msk = tsfm(image, mask=mask)
 ```
 Below are some potential images that could be obtained from selecting random transformations from our predefined list of transformations.
 
-<img src="/Images/randomchoice/randomchoice1.png" alt="random 1" width="250"/> <img src="/Images/randomchoice/randomchoice2.png" alt="random 2" width="250"/> <img src="/Images/randomchoice/randomchoice3.png" alt="random 3" width="250"/>
+<img src="/Images/randomchoice/randomchoice1.png" alt="random 1" width="200"/> <img src="/Images/randomchoice/randomchoice2.png" alt="random 2" width="200"/> <img src="/Images/randomchoice/randomchoice3.png" alt="random 3" width="200"/>
 
 **OneOf** will select only one transform from the list.
 ```python
